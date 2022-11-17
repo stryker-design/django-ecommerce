@@ -1,2 +1,1 @@
-# cannabis-commerce
 # django-ecommerce
