@@ -4,10 +4,15 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.urls import reverse
+
 
 class Category(models.Model):
-    name = models.CharField(max_length=75, db_index=True, blank=True)
+    name = models.CharField(max_length=75, db_index=True, unique=True, blank=True)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('store:category-view', args=[self.slug])
 
 
     class Meta:
@@ -30,6 +35,7 @@ class Product(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='product_creator')
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=100, blank=True)
+    type = models.CharField(max_length=25, blank=True, default='Dry White')
     brand = models.CharField(max_length=255, blank=True)
     price = models.DecimalField(max_digits=4, decimal_places=2)
     best_seller = models.BooleanField(default=False)
@@ -44,6 +50,9 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('store:product-detail', args=[self.slug])
 
     class Meta:
         verbose_name_plural = 'Products'
