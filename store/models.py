@@ -33,7 +33,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='product_creator')
     title = models.CharField(max_length=100)
-    description = models.TextField(max_length=100, blank=True)
+    description = models.TextField(max_length=1000, blank=True)
     type = models.CharField(max_length=25, blank=True, default='Dry White')
     brand = models.CharField(max_length=255, blank=True)
     price = models.DecimalField(max_digits=4, decimal_places=2)

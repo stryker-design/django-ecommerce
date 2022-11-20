@@ -19,3 +19,6 @@ const CartDropdown = document.getElementById("cart-dropdown");
 shoppingCart.addEventListener("click", function () {
   CartDropdown.classList.toggle("hidden");
 });
+
+
+
