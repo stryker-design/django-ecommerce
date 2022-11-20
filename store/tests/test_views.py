@@ -1,11 +1,11 @@
-from unittest import skip # Allows skipping tests using @skip
+from unittest import skip  # Allows skipping tests using @skip
 
-from django.test import TestCase, Client, RequestFactory
-from django.urls import reverse
 from django.contrib.auth.models import User
+from django.test import Client, RequestFactory, TestCase
+from django.urls import reverse
+
 from store.models import Category, Product
 from store.views import all_products
-
 
 
 class TestViewResponses(TestCase):
@@ -18,7 +18,8 @@ class TestViewResponses(TestCase):
                         slug='reisling', price='14.99', image='reisling')
 
     def test_url_allowed_hosts(self):
-        response = self.c.get('/')
+        # Currently ALLOWED_HOSTS = '*'
+        response = self.c.get('/', HTTP_HOST = 'mydomain.com')
         self.assertEqual(response.status_code, 200)
 
     def test_all_products_url(self):

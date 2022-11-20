@@ -13,17 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),
     path('', include('users.urls', namespace='users')),
     path('', include('store.urls', namespace='store')),
+    path('basket/', include('store_basket.urls', namespace='store_basket')),
 
     # TAILWIND
     path("__reload__/", include("django_browser_reload.urls")),

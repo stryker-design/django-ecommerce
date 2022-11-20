@@ -1,8 +1,8 @@
-from django import forms
-from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, UserChangeForm
-from django.contrib.auth.models import User 
-
 from crispy_forms.helper import FormHelper
+from django import forms
+from django.contrib.auth.forms import (PasswordResetForm, UserChangeForm,
+                                       UserCreationForm)
+from django.contrib.auth.models import User
 
 
 class NewUserForm(UserCreationForm):

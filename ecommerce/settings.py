@@ -1,6 +1,5 @@
-from pathlib import Path
 import os
-
+from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,6 +30,8 @@ INSTALLED_APPS = [
     'core',
     'users',
     'store',
+    'store_basket',
+\
 
     # TAILWIND
     'tailwind',
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
 
     # CRISPY FORMS
     'crispy_forms',
-     'crispy_tailwind',
+    'crispy_tailwind',
   
 
    

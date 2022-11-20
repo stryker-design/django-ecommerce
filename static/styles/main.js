@@ -11,3 +11,11 @@ const categoryDropDown = document.getElementById("category-dropdown");
 category.addEventListener("click", function () {
   categoryDropDown.classList.toggle("hidden");
 });
+
+
+const shoppingCart = document.getElementById("cart");
+const CartDropdown = document.getElementById("cart-dropdown");
+
+shoppingCart.addEventListener("click", function () {
+  CartDropdown.classList.toggle("hidden");
+});
