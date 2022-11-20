@@ -3,8 +3,16 @@ from django.db import models
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
-
 from django.urls import reverse
+
+class ProductManager(models.Manager):
+    """
+    Defaults product queries to filter and pull only active products.
+    If you want to show products that are not active this will need disabled.
+    Allows for fat models and skinny views.
+    """
+    def get_queryset(self):
+        return super(ProductManager, self).get_queryset().filter(as_active=True)
 
 
 class Category(models.Model):
@@ -12,7 +20,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=255, unique=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('store:category-view', args=[self.slug])
+        return reverse('store:category-detail', args=[self.slug])
 
 
     class Meta:
@@ -21,13 +29,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
-
-"""Add in best seller boolean field
-    for product in products:
-        if product.is_bestseller:
-            display in template.
-"""
-
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
@@ -45,11 +46,14 @@ class Product(models.Model):
     """May have a product that is out of stock and incative (not for sale)
         but you dont want to delete it because you will have it in stock in the future.
         if inactive it will not display on web page
-        if product.is_active display product.
+        if product.is_active display product. 
     """
+
     is_active = models.BooleanField(default=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now_add=True)
+    objects = models.Manager()
+    products = ProductManager()
 
     def get_absolute_url(self):
         return reverse('store:product-detail', args=[self.slug])
