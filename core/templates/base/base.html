@@ -8,7 +8,9 @@
     <title>{% block title %}{% endblock %}</title>
     {% tailwind_css %}
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+    <script>
+      let user = "{{request.user}}";
+    </script>
   
   </head>
 

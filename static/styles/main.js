@@ -1,9 +1,13 @@
+// MY ACCOUNT DROPDOWN
+
 const myAccount = document.getElementById("my-account");
 const dropDown = document.getElementById("dropdown");
 
 myAccount.addEventListener("click", function () {
   dropDown.classList.toggle("hidden");
 });
+
+// CATEGORY DROPDOWN
 
 const category = document.getElementById("category");
 const categoryDropDown = document.getElementById("category-dropdown");
@@ -12,13 +16,32 @@ category.addEventListener("click", function () {
   categoryDropDown.classList.toggle("hidden");
 });
 
+// BASKET DROPDOWN
 
-const shoppingCart = document.getElementById("cart");
-const CartDropdown = document.getElementById("cart-dropdown");
+const shoppingBasket = document.getElementById("basket");
+const basketDropdown = document.getElementById("basket-dropdown");
 
-shoppingCart.addEventListener("click", function () {
-  CartDropdown.classList.toggle("hidden");
+shoppingBasket.addEventListener("click", function () {
+  basketDropdown.classList.toggle("hidden");
 });
 
+/////////////////////////////
+// ADD TO BASKET //
+/////////////////////////////
 
+// this keyword refers to objects. Similar to self in python.
 
+const addToBasketBtn = document.getElementById("add-btn");
+
+addToBasketBtn.addEventListener("click", function () {
+  let productId = this.dataset.product;
+  let action = this.dataset.action;
+  console.log("productID", productId, "Action:", action);
+  console.log("USER", user);
+
+  if (user == "AnonymousUser") {
+    addCookieItem(productID, action);
+  } else {
+    updateUserOrder(productId, action);
+  }
+});
