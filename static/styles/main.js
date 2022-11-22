@@ -33,7 +33,8 @@ shoppingBasket.addEventListener("click", function () {
 
 const addToBasketBtn = document.getElementById("add-btn");
 
-addToBasketBtn.addEventListener("click", function () {
+addToBasketBtn.addEventListener("click", function (e) {
+  e.preventDefault();
   let productId = this.dataset.product;
   let action = this.dataset.action;
   console.log("productID", productId, "Action:", action);
@@ -45,3 +46,25 @@ addToBasketBtn.addEventListener("click", function () {
     updateUserOrder(productId, action);
   }
 });
+
+function updateUserOrder(productId, action) {
+  console.log("User is authenticated, sending data...");
+
+  var url = "/basket/update-item/";
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrftoken,
+    },
+    body: JSON.stringify({ 'productId': productId, 'action': action }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log('data:', data);
+      // location.reload();
+    });
+}
