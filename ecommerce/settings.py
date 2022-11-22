@@ -74,7 +74,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'store_basket.context_processor.basket', # Site wide access. Whereever they enter the website a session will be created
             ],
         },
     },

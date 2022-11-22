@@ -7,6 +7,4 @@ app_name = 'store_basket'
 
 urlpatterns = [
     path('summary/', views.basket_summary, name='basket-summary'), 
-    path('update-item/', views.updateItem, name='update-item'),
-
 ]
