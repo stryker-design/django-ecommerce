@@ -18,13 +18,13 @@ class NewUserForm(UserCreationForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False 
 
-        for fieldname in ['username', 'first_name', 'last_name', 'password1', 'password2']:
+        for fieldname in ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
 
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
     def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)

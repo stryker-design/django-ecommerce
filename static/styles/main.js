@@ -68,3 +68,5 @@ shoppingBasket.addEventListener("click", function () {
 //       // location.reload();
 //     });
 // }
+
+

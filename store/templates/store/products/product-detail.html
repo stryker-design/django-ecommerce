@@ -52,7 +52,7 @@
           <div class="flex justify-between">
             <div class="py-3">
               <label class="pr-4">Quantity</label>
-              <select id="quanitity-select" class="rounded-md">
+              <select id="select" class="rounded-md">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -62,7 +62,7 @@
             </div>
             
             <div class="py-3">
-              <button id="add-btn" data-product="{{product.id}}" data-action="add" class="w-full add-btn flex justify-center items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add to basket</button>
+              <button type="button" id="addbutton" value="{{product.id}}"  class="w-full add-btn flex justify-center items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add to basket</button>
             </div>
        
 
@@ -154,3 +154,26 @@
 
   {% include 'includes/footer.html' %} {% endblock %}
 </section>
+
+
+
+<script>
+  $(document).on('click', '#addbutton', function (e) {
+      e.preventDefault();
+      $.ajax({
+          type: 'POST',
+          url: '{% url "store_basket:basket_add" %}',
+          data: {
+              productid: $('#addbutton').val(),
+              // productqty: $('#select option:selected').text(),
+              csrfmiddlewaretoken: "{{csrf_token}}",
+              action: 'post'
+          },
+          success: function (json) {
+            //  document.getElementById("basket-qty").innerHTML = json.qty
+          },
+          error: function (xhr, errmsg, err) {}
+      });
+  })
+ 
+</script>
